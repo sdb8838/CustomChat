@@ -1,0 +1,5 @@
+openai tools fine_tunes.prepare_data -f we-wingit-data3.csv
+openai api fine_tunes.create -t "we-wingit-data3_prepared.jsonl" -m davinci (poner fin a \n, no a END)
+(Created fine-tune: ft-wm4CjPZJ5B0VE2KTrz7FOOzv)
+openai api fine_tunes.create -t "we-wingit-data3_prepared.jsonl" -m davinci --n_epochs 16 (poner fin a \n, no a END)
+(n_epochs por defecto a 4.  Bien para muchos datos de entrenamiento... cientos.  Aquí mejor subimos).
