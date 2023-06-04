@@ -26,7 +26,8 @@ document.addEventListener('submit', (e) => {
 }) 
 
 async function fetchReply(){
-    const url = 'https://master--creative-queijadas-66d3a8.netlify.app/.netlify/functions/fetchAI'
+    //const url = 'https://master--creative-queijadas-66d3a8.netlify.app/.netlify/functions/fetchAI'
+    const url = '.netlify/functions/fetchAI'
    
     const response = await fetch (url, {
         method: 'POST',
@@ -38,18 +39,8 @@ async function fetchReply(){
     const data = await response.json()
     console.log(data)
 
-    /* const response = await openai.createCompletion({
-        model: 'davinci:ft-personal-2023-06-04-08-44-37',
-        prompt: conversationStr,
-        presence_penalty: 0,
-        frequency_penalty: 0.3,
-        max_tokens: 100,
-        temperature: 0,
-        stop: [' END', '->']
-    })*/ 
-
-    // conversationStr+=` ${response.data.choices[0].text} END`
-    // renderTypewriterText(response.data.choices[0].text)
+    conversationStr+=` ${data.reply.choices[0].text} END`
+    renderTypewriterText(data.reply.choices[0].text)
 }
 
 function renderTypewriterText(text) {
