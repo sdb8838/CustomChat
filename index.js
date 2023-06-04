@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from 'openai'
+/*import { Configuration, OpenAIApi } from 'openai'
 //import { process } from './env'
 
 const configuration = new Configuration({
@@ -6,7 +6,7 @@ const configuration = new Configuration({
 })
 
 const openai = new OpenAIApi(configuration)
-
+*/
 const chatbotConversation = document.getElementById('chatbot-conversation')
  
 let conversationStr = ''
@@ -26,7 +26,19 @@ document.addEventListener('submit', (e) => {
 }) 
 
 async function fetchReply(){
-    const response = await openai.createCompletion({
+    const url = 'https://master--creative-queijadas-66d3a8.netlify.app/.netlify/functions/fetchAI'
+   
+    const response = await fetch (url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'text/plain',
+        },
+        body: conversationStr
+    })
+    const data = await response.json()
+    console.log(data)
+
+    /* const response = await openai.createCompletion({
         model: 'davinci:ft-personal-2023-06-04-08-44-37',
         prompt: conversationStr,
         presence_penalty: 0,
@@ -34,10 +46,10 @@ async function fetchReply(){
         max_tokens: 100,
         temperature: 0,
         stop: [' END', '->']
-    }) 
-    console.log(response)
-    conversationStr+=` ${response.data.choices[0].text} END`
-    renderTypewriterText(response.data.choices[0].text)
+    })*/ 
+
+    // conversationStr+=` ${response.data.choices[0].text} END`
+    // renderTypewriterText(response.data.choices[0].text)
 }
 
 function renderTypewriterText(text) {
